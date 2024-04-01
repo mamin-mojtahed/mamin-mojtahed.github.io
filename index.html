@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-</head>
-<body>
-    <h1>Welcome to My Website</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Amin's Webpage</title>
+  </head>
+  <body style="display: flex; flex-direction: column; align-items: center">
+    <header id="header">
+      <p id="emoticon" hidden="true" onmouseenter="hoverHandler()">( ͡° ͜ʖ ͡°)</p>
+      <img
+        onmouseenter="hoverHandler(event)"
+        onmouseleave="leaveHandler(event)"
+        src="Wide HCI Human Computer Interaction.JPG"
+        alt="Creation of HCI Header Image"
+      />
+    </header>
+
+    <h1>Welcome to My Websiste</h1>
     <p>This is the default content for the index.html file.</p>
     <h3>TESTING DEPLOYMENT SPEED</h3>
     <h4>TEST SPEED AGAIN</h4>
-</body>
+    <script>
+      function hoverHandler(event) {
+        const emotElem = document.getElementById("emoticon");
+        if (!emotElem) throw new Error("Element not found");
+        emotElem.hidden = false;
+      }
+      function leaveHandler(event) {
+        // event.stopImmediatePropagation();
+        const emotElem = document.getElementById("emoticon");
+        if (!emotElem) throw new Error("Element not found");
+        emotElem.hidden = true;
+      }
+      const date = new Date();
+      document.write(date);
+    </script>
+  </body>
 </html>

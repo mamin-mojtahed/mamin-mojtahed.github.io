@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Cambria";
+  src: url("Cambria.ttc") format("truetype");
+}
+body {
+  height: 100vh;
+  margin: 0;
+  /* padding: 10px; */
+}
+* {
+  font-family: Cambria;
+  color: #c45912;
+  /* background-color: indigo; */
+}
+*:hover {
+  text-emphasis: bold;
+}
+#header {
+  /* width: 100px; */
+  /* height: 100px; */
+  /* display: flex; */
+  justify-self: stretch;
+  /* padding: 10px; */
+}
+#emoticon {
+  font-size: 20px;
+  /* color: white; */
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  rotate: -20deg;
+}
+img {
+  width: 100%;
+  object-fit: contain;
+}
+img:hover {
+  cursor: pointer;
+}
