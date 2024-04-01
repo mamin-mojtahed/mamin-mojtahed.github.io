@@ -6,21 +6,45 @@
     <link rel="stylesheet" href="./style.css" />
     <title>Amin's Webpage</title>
   </head>
-  <body style="display: flex; flex-direction: column; align-items: center">
+  <body>
     <header id="header">
-      <p id="emoticon" hidden="true" onmouseenter="hoverHandler()">( ͡° ͜ʖ ͡°)</p>
+      <div id="emoticon" hidden="true" onmouseenter="hoverHandler()">
+        ( ͡° ͜ʖ ͡°)
+      </div>
       <img
+        id="banner"
         onmouseenter="hoverHandler(event)"
         onmouseleave="leaveHandler(event)"
-        src="Wide HCI Human Computer Interaction.JPG"
+        src="files/Wide HCI Human Computer Interaction.JPG"
         alt="Creation of HCI Header Image"
       />
     </header>
-
-    <h1>Welcome to My Websiste</h1>
-    <p>This is the default content for the index.html file.</p>
-    <h3>TESTING DEPLOYMENT SPEED</h3>
-    <h4>TEST SPEED AGAIN</h4>
+    <div id="content">
+      <div id="pfpCont">
+        <img
+          id="pfp"
+          src="files/MyPFP.JPG"
+          alt="Amin Mojtahed's Profile Picture"
+        />
+      </div>
+      <div id="list">
+        <h1>Amin Mojtahed</h1>
+        <div id="grid">
+          <a href="files/Resume-Amin-Mojtahed.pdf">Resume</a>
+          <a href="mailto:amin.mojtahed@uwaterloo.ca">Email</a>
+          <a href="https://linkedin.com/in/mamin-mojtahed">LinkedIn</a>
+          <a href="https://github.com/mamin-mojtahed">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>
+        Hi! I'm Amin, a 3rd-year computer science student at the University of
+        Waterloo. I'm pursuing a specialization in human-computer
+        interaction—while peeking at computational fine arts and psychology.
+        Overall, my goal is make humanities-themed projects out of front-end development;
+      </p>
+    </footer>
     <script>
       function hoverHandler(event) {
         const emotElem = document.getElementById("emoticon");
@@ -33,8 +57,6 @@
         if (!emotElem) throw new Error("Element not found");
         emotElem.hidden = true;
       }
-      const date = new Date();
-      document.write(date);
     </script>
   </body>
 </html>

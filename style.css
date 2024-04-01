@@ -1,39 +1,85 @@
 @font-face {
   font-family: "Cambria";
-  src: url("Cambria.ttc") format("truetype");
+  src: url("src/Cambria.ttc") format("truetype");
 }
+
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
-  margin: 0;
-  /* padding: 10px; */
+  background-color: antiquewhite;
+  gap: 10px;
 }
+
 * {
-  font-family: Cambria;
   color: #c45912;
-  /* background-color: indigo; */
+  box-sizing: border-box;
+  font-family: Cambria;
+  text-align: center;
 }
+
 *:hover {
   text-emphasis: bold;
 }
+
 #header {
-  /* width: 100px; */
-  /* height: 100px; */
-  /* display: flex; */
-  justify-self: stretch;
-  /* padding: 10px; */
+  width: 100%;
+  position: relative;
 }
+
 #emoticon {
-  font-size: 20px;
-  /* color: white; */
+  color: white;
+  font-size: 3.5vw;
   position: absolute;
-  left: 50%;
-  top: 10%;
+  left: 42.5%;
+  top: 40%;
   rotate: -20deg;
 }
+
 img {
   width: 100%;
+  border-radius: 30px;
   object-fit: contain;
 }
-img:hover {
+
+img#banner:hover {
   cursor: pointer;
+}
+
+div#pfpCont {
+  flex: 1 1 auto;
+  width: 50%;
+  display: flex;
+}
+
+div#content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+div#list {
+  display: grid;
+  gap: 10px;
+  flex: 1 1 auto;
+  width: 50%;
+}
+
+h1 {
+  margin: 0;
+}
+
+a,
+p {
+  font-size: large;
+}
+
+div#grid {
+  display: grid;
+  gap: 10px;
+}
+
+footer p {
+  text-align: justify;
 }
