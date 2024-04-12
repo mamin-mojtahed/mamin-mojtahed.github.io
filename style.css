@@ -4,7 +4,7 @@
 }
 
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
   margin: 0;
   gap: 20px;
   color: #c45912;
@@ -20,7 +20,8 @@ body {
   background-color: antiquewhite;
 }
 
-body > *, body img {
+body > *,
+body img {
   max-width: 720px;
 }
 
@@ -32,7 +33,7 @@ body > *, body img {
 
 #emoticon {
   color: white;
-  font-size: min(3.5vw, 30q);
+  font-size: min(3.5vw, 30Q);
   position: absolute;
   left: 42.5%;
   top: 40%;
@@ -40,7 +41,7 @@ body > *, body img {
 }
 
 #title {
-  font-size: min(7vw, 60q);
+  font-size: min(7vw, 60Q);
   position: absolute;
   top: 22%;
   left: 20px;
@@ -83,7 +84,7 @@ h1 {
 
 a,
 p {
-  font-size: min(3.5vw, 30q);
+  font-size: min(3.5vw, 30Q);
 }
 
 a {
@@ -98,8 +99,10 @@ a {
 }
 
 a > i {
-  font-size:calc( min(3.5vw, 30q) / 30 * 95);
+  font-size: calc(min(3.5vw, 30Q) * 2);
   object-fit: contain;
+  text-rendering: optimizeLegibility;
+  font-family: fontAwesome;
 }
 
 i::after {
