@@ -1,6 +1,23 @@
 @font-face {
   font-family: "Cambria";
   src: url("fonts/Cambria.ttc") format("truetype");
+  /* default */
+}
+@font-face {
+  font-family: "Cambria";
+  src: url("fonts/Cambriab.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Cambria";
+  src: url("fonts/Cambriai.ttf") format("truetype");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Cambria";
+  src: url("fonts/Cambriaz.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
 }
 
 * {
@@ -9,7 +26,7 @@
   gap: 20px;
   color: #c45912;
   box-sizing: border-box;
-  font-family: Cambria;
+  font-family: "Cambria";
 }
 
 body {
@@ -76,6 +93,7 @@ div#list {
   gap: 10px;
   flex: 1 1 auto;
   width: 50%;
+  font-style: italic;
 }
 
 h1 {

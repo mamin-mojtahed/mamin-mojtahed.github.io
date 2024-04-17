@@ -4,19 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.5.2/css/all.css"
+    />
     <title>Amin's Webpage</title>
-    <link rel="icon" href="files/HCI Site Icon.jpg">
+    <link rel="icon" href="files/HCI Site Icon.jpg" />
   </head>
   <body>
     <header id="header">
-      <div id="emoticon" hidden="true" onmouseenter="hoverHandler()">
-        ( ͡° ͜ʖ ͡°)
-      </div>
+      <div id="emoticon" hidden="true">( ͡° ͜ʖ ͡°)</div>
       <img
         id="banner"
-        onmouseenter="hoverHandler(event)"
-        onmouseleave="leaveHandler(event)"
         src="files/Wide HCI Human Computer Interaction.JPG"
         alt="Creation of HCI Header Image"
       />
@@ -63,18 +62,6 @@
         development.
       </p>
     </footer>
-    <script>
-      function hoverHandler(event) {
-        const emotElem = document.getElementById("emoticon");
-        if (!emotElem) throw new Error("Element not found");
-        emotElem.hidden = false;
-      }
-      function leaveHandler(event) {
-        // event.stopImmediatePropagation();
-        const emotElem = document.getElementById("emoticon");
-        if (!emotElem) throw new Error("Element not found");
-        emotElem.hidden = true;
-      }
-    </script>
+    <script type="module" src="src/main.ts"></script>
   </body>
 </html>
