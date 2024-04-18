@@ -1,10 +1,10 @@
 // handlers for emoticon hover
-export function hoverHandler(e: Event) {
+export function hoverHandler() {
   const emotElem = document.getElementById("emoticon");
   if (!emotElem) throw new Error("Element not found");
   emotElem.hidden = false;
 }
-export function leaveHandler(e: Event) {
+export function leaveHandler() {
   // event.stopImmediatePropagation();
   const emotElem = document.getElementById("emoticon");
   if (!emotElem) throw new Error("Element not found");
