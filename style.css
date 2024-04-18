@@ -55,6 +55,12 @@ body img {
   left: 42.5%;
   top: 40%;
   rotate: -20deg;
+  transition: opacity 2s;
+  opacity: 0;
+}
+
+#emoticon.revealed {
+  opacity: 100;
 }
 
 #title {
@@ -114,6 +120,15 @@ a {
   text-decoration: none;
   justify-content: center;
   border: 2px solid tan;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+a:hover {
+  background-color: tan;
+  color: antiquewhite;
+}
+a:hover > i {
+  color: antiquewhite;
 }
 
 a > i {
@@ -121,6 +136,7 @@ a > i {
   object-fit: contain;
   text-rendering: optimizeLegibility;
   font-family: fontAwesome;
+  transition: color 0.2s;
 }
 
 i::after {
