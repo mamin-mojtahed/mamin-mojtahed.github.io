@@ -1,4 +1,4 @@
 export default {
   base: "/",
-  publicDir: "files",
+  // publicDir: "files", // default preserves "files" dir
 };
