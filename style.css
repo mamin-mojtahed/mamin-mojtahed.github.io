@@ -45,6 +45,7 @@ body img {
 #header {
   width: 100%;
   position: relative;
+  z-index: 3;
   display: flex;
 }
 
@@ -78,6 +79,106 @@ img {
   object-fit: contain;
 }
 
+main#page-section .project {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+main#page-section .projects-container {
+  display: grid;
+  gap: 2.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(196, 89, 18, 0.24);
+}
+
+main#page-section .projects-container > .project + .project {
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(196, 89, 18, 0.16);
+}
+
+main#page-section .project-media {
+  position: relative;
+  flex: 1 1 0;
+  width: 100%;
+  max-width: 100%;
+  /* min-width: 0; */
+  /* min-height: 180px; */
+  height: 270px;
+  overflow: visible;
+  --thumb-shift: clamp(0.75rem, 2.4vw, 1.55rem);
+}
+
+main#page-section .project-thumb {
+  position: absolute;
+  width: 78%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  box-shadow: 0 16px 30px rgba(148, 96, 34, 0.18);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
+}
+
+main#page-section .project-thumb-top {
+  z-index: 3;
+  right: calc(var(--thumb-shift) * 2);
+  bottom: calc(var(--thumb-shift) * 4);
+}
+
+main#page-section .project-thumb-middle {
+  z-index: 2;
+  right: var(--thumb-shift);
+  bottom: calc(var(--thumb-shift) * 2);
+}
+
+main#page-section .project-thumb-bottom {
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+}
+
+main#page-section .project-thumb:hover,
+main#page-section .project-thumb:focus-visible {
+  z-index: 4;
+  transform: translate(-0.25rem, -0.25rem) scale(1.01);
+  box-shadow: 0 20px 36px rgba(148, 96, 34, 0.24);
+  outline: none;
+}
+
+main#page-section .project-copy {
+  flex: 1 1 0;
+  min-width: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+main#page-section .project-copy .title,
+main#page-section .project-copy .sub-title,
+main#page-section .project-copy ul,
+main#page-section .project-copy a {
+  margin-bottom: 0;
+}
+
+main#page-section .project-copy ul {
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+main#page-section .project-copy a {
+  width: fit-content;
+}
+
+main#page-section .project-media:hover .project-thumb {
+  filter: saturate(1.02);
+}
+
 img#banner:hover {
   cursor: pointer;
 }
@@ -92,6 +193,114 @@ div#content {
   display: flex;
   align-items: stretch;
   gap: 20px;
+}
+
+nav#tabs {
+  width: 100%;
+  margin-top: -60px;
+  position: relative;
+  z-index: 1;
+  /* z-index: -1; */
+}
+
+nav#tabs .tabs-grid {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  width: 100%;
+}
+
+nav#tabs .bookmark {
+  --bookmark-index: 0;
+  --bookmark-lift: 0px;
+  position: relative;
+  flex: 1 1 0;
+  min-height: 52px;
+  padding: 45px 18px 15px;
+  margin-left: -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  background: linear-gradient(180deg, #efd7b7 0%, #e7c391 100%);
+  /* border: 2px solid #d8b382; */
+  /* border: 0; */
+  /* border-bottom: 0; */
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 10px 18px rgba(148, 96, 34, 0.1);
+  transform: translateY(var(--bookmark-lift));
+  transition:
+    transform 0.24s ease,
+    filter 0.24s ease,
+    background-color 0.24s ease,
+    color 0.24s ease,
+    box-shadow 0.24s ease;
+  z-index: calc(20 - var(--bookmark-index));
+  overflow: hidden;
+}
+
+nav#tabs .bookmark:first-child {
+  margin-left: 0;
+}
+
+/* nav#tabs .bookmark::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px -7px;
+  height: 11px;
+  background: linear-gradient(180deg, rgba(134, 89, 36, 0.62), rgba(134, 89, 36, 0));
+  opacity: 0.45;
+  transition: opacity 0.24s ease;
+} */
+
+nav#tabs .bookmark span {
+  position: relative;
+  z-index: 1;
+}
+
+nav#tabs .bookmark.active {
+  min-height: 52px;
+  background: linear-gradient(180deg, #f4e0c2 0%, #ecd0a5 100%);
+  color: #c45912;
+  box-shadow: 0 12px 20px rgba(148, 96, 34, 0.14);
+  z-index: 30;
+  transform: translateY(var(--bookmark-lift));
+}
+
+nav#tabs .bookmark:hover,
+nav#tabs .bookmark:focus-visible {
+  color: #c45912;
+  background: linear-gradient(180deg, #f7e6cc 0%, #efd6ad 100%);
+  outline: none;
+}
+
+nav#tabs.has-hover .bookmark.is-before {
+  --bookmark-lift: -8px;
+  filter: saturate(0.88) brightness(0.97);
+}
+
+nav#tabs.has-hover .bookmark.is-after {
+  --bookmark-lift: -8px;
+  filter: saturate(0.88) brightness(0.97);
+}
+
+nav#tabs.has-hover .bookmark.is-hovered {
+  --bookmark-lift: 10px;
+  z-index: 40;
+}
+
+nav#tabs .bookmark:focus-visible {
+  box-shadow: 0 0 0 3px rgba(196, 89, 18, 0.12), 0 12px 20px rgba(148, 96, 34, 0.14);
+}
+
+main#page-section p + p {
+  margin-top: 0.75rem;
+}
+
+nav#tabs .bookmark.active > i {
+  color: antiquewhite;
 }
 
 div#list {
@@ -111,9 +320,14 @@ p {
   font-size: min(3.5vw, 30Q);
 }
 
-a {
+div.project a {
+  flex-direction: row;
   display: flex;
+}
+
+a {
   gap: 5px;
+  display: flex;
   flex-direction: column;
   padding: 10px;
   border-radius: 30px;
@@ -121,6 +335,7 @@ a {
   justify-content: center;
   border: 2px solid tan;
   transition: color 0.2s, background-color 0.2s;
+  align-items: center;
 }
 
 a:hover {
@@ -131,7 +346,7 @@ a:hover > i {
   color: antiquewhite;
 }
 
-a > i {
+div#content a > i {
   font-size: calc(min(3.5vw, 30Q) * 2);
   object-fit: contain;
   text-rendering: optimizeLegibility;
@@ -151,6 +366,58 @@ div#grid {
   text-align: center;
 }
 
+body[data-page="network"] div#content {
+  width: 100%;
+  justify-content: center;
+}
+
+body[data-page="network"] div#list {
+  width: 100%;
+  font-style: normal;
+}
+
+body[data-page="network"] div#grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body[data-page="network"] div#grid a {
+  min-height: 120px;
+  padding: 18px 14px;
+}
+
 footer p {
   text-align: left;
+}
+
+@media (max-width: 760px) {
+  main#page-section .project {
+    flex-direction: column;
+  }
+
+  main#page-section .project-media {
+    width: min(100%, 360px);
+    flex-basis: auto;
+    min-height: 240px;
+    --thumb-shift: clamp(0.55rem, 3vw, 1rem);
+    margin-bottom: 0.75rem;
+  }
+
+  main#page-section .project-thumb {
+    width: 80%;
+  }
+
+  body[data-page="network"] div#grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+}
+
+div.links {
+  display: flex;
+  gap: 10px;
+}
+
+div.links i {
 }

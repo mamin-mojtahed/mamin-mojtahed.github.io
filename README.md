@@ -1,5 +1,5 @@
 # mamin-mojtahed.github.io
 
-Built with HTML/CSS + TS + Vite
+Static site built with HTML, CSS, and JavaScript.
 <br>
 …and some humour
