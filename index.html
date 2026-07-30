@@ -3,27 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Amin Mojtahed's personal webpage, a 4th-year computer science student at the University of Waterloo specializing in human-computer interaction.">
-    <meta name="keywords" content="Amin Mojtahed, computer science, human-computer interaction, HCI, University of Waterloo, front-end development, computational fine arts, psychology, humanities">
+    <title>Amin's Webpage</title>
+    <meta
+      name="description"
+      content="Amin Mojtahed is a last-year Computer Science student at the University of Waterloo focused on human-computer interaction, psychology, cognitive science, and user-friendly interface design."
+    />
+    <meta
+      name="keywords"
+      content="Amin Mojtahed, University of Waterloo, computer science, human-computer interaction, HCI, UX, user interface design, psychology, cognitive science, computational fine art"
+    />
     <meta name="author" content="Amin Mojtahed">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Amin Mojtahed's Webpage">
-    <meta property="og:description" content="Amin Mojtahed's personal webpage, a 4th-year computer science student at the University of Waterloo specializing in human-computer interaction.">
-    <meta property="og:image" content="files/Wide HCI Human Computer Interaction.JPG">
-    <meta property="og:url" content="https://mamin-mojtahed.github.io">
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#f5e8d0" />
+    <link rel="canonical" href="https://mamin-mojtahed.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Amin Mojtahed" />
+    <meta property="og:title" content="Amin Mojtahed | Computer Science, HCI, and UX" />
+    <meta
+      property="og:description"
+      content="Amin Mojtahed is a last-year Computer Science student at the University of Waterloo focused on human-computer interaction, psychology, cognitive science, and user-friendly interface design."
+    />
+    <meta property="og:url" content="https://mamin-mojtahed.github.io/" />
+    <meta
+      property="og:image"
+      content="https://mamin-mojtahed.github.io/files/Wide%20HCI%20Human%20Computer%20Interaction.JPG"
+    />
+    <meta property="og:image:alt" content="Wide header image for Amin Mojtahed's portfolio site" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Amin Mojtahed's Webpage">
-    <meta name="twitter:description" content="Amin Mojtahed's personal webpage, a 4th-year computer science student at the University of Waterloo specializing in human-computer interaction.">
-    <meta name="twitter:image" content="files/Wide HCI Human Computer Interaction.JPG">
+    <meta name="twitter:title" content="Amin Mojtahed | Computer Science, HCI, and UX">
+    <meta
+      name="twitter:description"
+      content="Amin Mojtahed is a last-year Computer Science student at the University of Waterloo focused on human-computer interaction, psychology, cognitive science, and user-friendly interface design."
+    />
+    <meta
+      name="twitter:image"
+      content="https://mamin-mojtahed.github.io/files/Wide%20HCI%20Human%20Computer%20Interaction.JPG"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.5.2/css/all.css"
     />
-    <title>Amin's Webpage</title>
     <link rel="icon" href="files/HCI Site Icon.jpg" />
   </head>
-  <body>
+  <body data-page="home" data-base="./">
     <header id="header">
       <div id="emoticon">( ͡° ͜ʖ ͡°)</div>
       <img
@@ -33,44 +61,42 @@
       />
       <h1 id="title">Amin Mojtahed</h1>
     </header>
+    <nav id="tabs" aria-label="Section tabs"></nav>
     <div id="content">
       <div id="pfpCont">
-        <img
-          id="pfp"
-          src="files/MyPFP.JPG"
-          alt="Amin Mojtahed's Profile Picture"
-        />
-      </div>
-      <div id="list">
-        <div id="grid">
-          <a href="files/Resume-Amin-Mojtahed.pdf">
-            <i class="fa-solid fa-file"></i>
-            Resume
-          </a>
-          <a href="mailto:amin.mojtahed@uwaterloo.ca">
-            <i class="fa-solid fa-at"></i>
-            Email
-          </a>
-          <a href="https://linkedin.com/in/mamin-mojtahed">
-            <i class="fa-brands fa-linkedin-in"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/mamin-mojtahed">
-            <i class="fa-brands fa-github"></i>
-            GitHub
-          </a>
-        </div>
-      </div>
+		<img
+			id="pfp"
+			src="files/MyPFP.JPG"
+			alt="Amin Mojtahed's Profile Picture"
+		/>
+	</div>
+	<div id="list">
+		<div id="grid">
+			<a href="files/Resume-Amin-Mojtahed.pdf">
+				<i class="fa-solid fa-file"></i>
+				Resume
+			</a>
+			<a href="mailto:amin.mojtahed@uwaterloo.ca">
+				<i class="fa-solid fa-at"></i>
+				Email
+			</a>
+			<a href="https://linkedin.com/in/mamin-mojtahed">
+				<i class="fa-brands fa-linkedin-in"></i>
+				LinkedIn
+			</a>
+			<a href="https://github.com/mamin-mojtahed">
+				<i class="fa-brands fa-github"></i>
+				GitHub
+			</a>
+		</div>
+	</div>
     </div>
-    <footer>
-      <p>
-        Hi! I'm Amin, a last-year computer science student at the University of Waterloo. On the side, I'm pursuing a joint major in psychology, a minor in cognitive science, and specializations in human-computer interaction and computational fine art.
-      </p>
+    <main id="page-section" aria-live="polite">
+      <p>Hi! I'm Amin, a last-year computer science student at the University of Waterloo. On the side, I'm pursuing a joint major in psychology, a minor in cognitive science, and specializations in human-computer interaction and computational fine art.</p>
       <br />
-      <p>
-        Overall, my goal is to have an interdisciplinary approach to projects, including but not limited to: developing user-friendly interfaces, researching technology use, and analyzing social observations.
-      </p>
-    </footer>
-    <script type="module" src="src/main.ts"></script>
+      <p>Overall, my goal is to have an interdisciplinary approach to projects, including but not limited to: developing user-friendly interfaces, researching technology use, and analyzing social observations.</p>
+    </main>
+    <footer id="page-footer"></footer>
+    <script src="main.js"></script>
   </body>
 </html>
