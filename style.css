@@ -359,21 +359,25 @@ i::after {
 }
 
 div#grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   text-align: center;
+}
+
+div#grid a {
+  flex: 1 1 calc(25% - 10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 14px;
+  min-height: 120px;
 }
 
 body[data-page="network"] div#content {
   width: 100%;
   justify-content: center;
-}
-
-body[data-page="network"] div#list {
-  width: 100%;
-  font-style: normal;
 }
 
 body[data-page="network"] div#grid {
