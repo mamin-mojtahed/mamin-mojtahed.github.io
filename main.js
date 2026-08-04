@@ -67,19 +67,10 @@ function getCurrentPage() {
 	return document.body.dataset.page || "home";
 }
 
-function getBasePath() {
-	return document.body.dataset.base || "./";
-}
-
-function buildHref(basePath, pageKey) {
-	return pageKey === "home" ? basePath : `${basePath}${pageKey}/`;
-}
-
 function renderTabs(currentPage) {
 	const tabsRoot = document.getElementById("tabs");
 	if (!tabsRoot) throw new Error("Tabs container not found");
 
-	const basePath = getBasePath();
 	tabsRoot.innerHTML = `
 		<div class="tabs-grid">
 			${TAB_ORDER.map((pageKey, index) => {
@@ -88,7 +79,7 @@ function renderTabs(currentPage) {
 				return `
 					<a
 						class="bookmark${isActive ? " active" : ""}"
-						href="${buildHref(basePath, pageKey)}"
+						href="${pageKey === "home" ? '/' : `/${pageKey}`}"
 						data-index="${index}"
 						data-page="${pageKey}"
 						style="--bookmark-index:${index};"
@@ -133,19 +124,15 @@ function renderTabs(currentPage) {
 function renderSection(currentPage) {
 	const config = PAGE_CONFIG[currentPage] || PAGE_CONFIG.home;
 	const titleElement = document.getElementById("title");
-	// const contentElement = document.getElementById("content");
 	const sectionElement = document.getElementById("page-section");
 	const footerElement = document.getElementById("page-footer");
 
-	if (!titleElement || !contentElement || !sectionElement || !footerElement) {
+	if (!titleElement || !sectionElement || !footerElement) {
 		throw new Error("Page template is missing required elements");
 	}
 
 	titleElement.textContent = config.title;
 	document.title = config.documentTitle;
-	// contentElement.innerHTML = SHARED_HOME_CONTENT;
-	// sectionElement.innerHTML += config.sectionHtml;
-	// footerElement.innerHTML = SHARED_HOME_FOOTER;
 }
 
 document.querySelectorAll("header *").forEach((elem) => {
