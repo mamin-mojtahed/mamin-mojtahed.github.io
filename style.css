@@ -102,53 +102,58 @@ main#page-section .projects-container > .project + .project {
 main#page-section .project-media {
   position: relative;
   flex: 1 1 0;
+  align-self: center;
   width: 100%;
   max-width: 100%;
   /* min-width: 0; */
   /* min-height: 180px; */
-  height: 270px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  background: transparent;
   overflow: visible;
   --thumb-shift: clamp(0.75rem, 2.4vw, 1.55rem);
 }
 
 main#page-section .project-thumb {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: 78%;
   max-width: none;
+  aspect-ratio: 16 / 9;
+  height: auto;
   object-fit: contain;
   object-position: center;
-  background: transparent;
+  background: #000;
   box-shadow: 0 16px 30px rgba(148, 96, 34, 0.18);
+  transform: translate(var(--thumb-x, -50%), var(--thumb-y, -50%));
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
     filter 0.28s ease;
 }
 
+main#page-section .project-thumb.is-white-background {
+  background: #fff;
+}
+
 main#page-section .project-thumb-top {
   z-index: 3;
-  right: calc(var(--thumb-shift) * 2);
-  bottom: calc(var(--thumb-shift) * 4);
+  --thumb-x: calc(-50% - var(--thumb-shift));
+  --thumb-y: calc(-50% - var(--thumb-shift) * 2);
 }
 
 main#page-section .project-thumb-middle {
   z-index: 2;
-  right: var(--thumb-shift);
-  bottom: calc(var(--thumb-shift) * 2);
+  --thumb-x: -50%;
+  --thumb-y: -50%;
 }
 
 main#page-section .project-thumb-bottom {
   z-index: 1;
-  right: 0;
-  bottom: 0;
-}
-
-main#page-section .project-thumb:hover,
-main#page-section .project-thumb:focus-visible {
-  z-index: 4;
-  transform: translate(-0.25rem, -0.25rem) scale(1.01);
-  box-shadow: 0 20px 36px rgba(148, 96, 34, 0.24);
-  outline: none;
+  --thumb-x: calc(-50% + var(--thumb-shift));
+  --thumb-y: calc(-50% + var(--thumb-shift) * 2);
 }
 
 main#page-section .project-copy {
@@ -173,10 +178,6 @@ main#page-section .project-copy ul {
 
 main#page-section .project-copy a {
   width: fit-content;
-}
-
-main#page-section .project-media:hover .project-thumb {
-  filter: saturate(1.02);
 }
 
 img#banner:hover {
@@ -403,7 +404,9 @@ footer p {
   main#page-section .project-media {
     width: min(100%, 360px);
     flex-basis: auto;
-    min-height: 240px;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    background: transparent;
     --thumb-shift: clamp(0.55rem, 3vw, 1rem);
     margin-bottom: 0.75rem;
   }

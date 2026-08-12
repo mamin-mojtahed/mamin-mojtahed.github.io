@@ -35,30 +35,51 @@ function leaveHandler() {
 	emotElem.classList.remove("revealed");
 }
 
-function setupProjectMediaHover() {
+function setupProjectMediaAutoScroll() {
 	const projectMedias = document.querySelectorAll("main#page-section .project-media");
 	if (!projectMedias.length) return;
 
-	const applyHoverZone = (projectMedia, event) => {
-		const bounds = projectMedia.getBoundingClientRect();
-		const xRatio = (event.clientX - bounds.left) / bounds.width;
-		const yRatio = (event.clientY - bounds.top) / bounds.height;
-		let hoverZone = "top";
+	const positionClasses = ["project-thumb-top", "project-thumb-middle", "project-thumb-bottom"];
 
-		if (xRatio < 1 / 3 || yRatio < 1 / 3) {
-			hoverZone = "bottom";
-		} else if (xRatio < 2 / 3 && yRatio < 2 / 3) {
-			hoverZone = "middle";
-		}
-
-		projectMedia.dataset.hover = hoverZone;
+	const applyOrder = (thumbs, startIndex = 0) => {
+		thumbs.forEach((thumb, index) => {
+			positionClasses.forEach((positionClass) => thumb.classList.remove(positionClass));
+			thumb.classList.add(positionClasses[(index + startIndex) % positionClasses.length]);
+		});
 	};
 
 	projectMedias.forEach((projectMedia) => {
-		projectMedia.addEventListener("pointerenter", (event) => applyHoverZone(projectMedia, event));
-		projectMedia.addEventListener("pointermove", (event) => applyHoverZone(projectMedia, event));
-		projectMedia.addEventListener("pointerleave", () => {
-			delete projectMedia.dataset.hover;
+		const thumbs = [...projectMedia.querySelectorAll(".project-thumb")];
+		if (thumbs.length < 3) return;
+
+		let rotation = 0;
+		let intervalId = null;
+
+		const start = () => {
+			if (intervalId) return;
+			projectMedia.dataset.autoscroll = "running";
+			intervalId = window.setInterval(() => {
+				rotation = (rotation - 1 + thumbs.length) % thumbs.length;
+				applyOrder(thumbs, rotation);
+			}, 2200);
+		};
+
+		const stop = () => {
+			if (intervalId) {
+				window.clearInterval(intervalId);
+				intervalId = null;
+			}
+			projectMedia.dataset.autoscroll = "paused";
+		};
+
+		applyOrder(thumbs, rotation);
+		start();
+
+		projectMedia.addEventListener("pointerenter", stop);
+		projectMedia.addEventListener("pointerleave", start);
+		projectMedia.addEventListener("focusin", stop);
+		projectMedia.addEventListener("focusout", (event) => {
+			if (!projectMedia.contains(event.relatedTarget)) start();
 		});
 	});
 }
@@ -143,4 +164,4 @@ document.querySelector("img#banner")?.addEventListener("mouseleave", leaveHandle
 const currentPage = getCurrentPage();
 renderTabs(currentPage);
 renderSection(currentPage);
-setupProjectMediaHover();
+setupProjectMediaAutoScroll();
