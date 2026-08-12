@@ -79,6 +79,10 @@ img {
   object-fit: contain;
 }
 
+img#pfp {
+  object-fit: cover;
+}
+
 main#page-section .project {
   width: 100%;
   display: flex;
