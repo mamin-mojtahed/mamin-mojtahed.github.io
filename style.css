@@ -130,7 +130,7 @@ main#page-section .project-thumb {
   object-fit: contain;
   object-position: center;
   background: #000;
-  box-shadow: 0 16px 30px rgba(148, 96, 34, 0.18);
+  box-shadow: 10px 20px 30px rgba(148, 96, 34, 0.5);
   transform: translate(var(--thumb-x, -50%), var(--thumb-y, -50%));
   transition:
     transform 0.28s ease,
@@ -428,7 +428,4 @@ footer p {
 div.links {
   display: flex;
   gap: 10px;
-}
-
-div.links i {
 }
