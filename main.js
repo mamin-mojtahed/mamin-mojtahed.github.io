@@ -74,6 +74,10 @@ function setupProjectMediaAutoScroll() {
 
 		applyOrder(thumbs, rotation);
 		start();
+		projectMedia.addEventListener("projectrotate", (event) => {
+			rotation = (rotation + event.detail.step + thumbs.length) % thumbs.length;
+			applyOrder(thumbs, rotation);
+		});
 
 		projectMedia.addEventListener("pointerenter", stop);
 		projectMedia.addEventListener("pointerleave", start);
@@ -81,6 +85,111 @@ function setupProjectMediaAutoScroll() {
 		projectMedia.addEventListener("focusout", (event) => {
 			if (!projectMedia.contains(event.relatedTarget)) start();
 		});
+	});
+}
+
+function setupProjectImageViewer() {
+	const projects = [...document.querySelectorAll("main#page-section .project")];
+	if (!projects.length) return;
+
+	const overlay = document.createElement("div");
+	overlay.className = "project-lightbox";
+	overlay.setAttribute("role", "dialog");
+	overlay.setAttribute("aria-modal", "true");
+	overlay.setAttribute("aria-label", "Expanded project image");
+	overlay.innerHTML = `
+		<button class="lightbox-control lightbox-close" type="button" aria-label="Close expanded image">
+			<i class="fa-solid fa-xmark" aria-hidden="true"></i>
+		</button>
+		<button class="lightbox-control lightbox-previous" type="button" aria-label="Previous project image">
+			<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+		</button>
+		<img class="lightbox-image" alt="">
+		<button class="lightbox-control lightbox-next" type="button" aria-label="Next project image">
+			<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+		</button>
+	`;
+	document.body.append(overlay);
+
+	const lightboxImage = overlay.querySelector(".lightbox-image");
+	const closeButton = overlay.querySelector(".lightbox-close");
+	const previousButton = overlay.querySelector(".lightbox-previous");
+	const nextButton = overlay.querySelector(".lightbox-next");
+	let activeProject = null;
+	let activeIndex = 0;
+	let lastFocusedElement = null;
+
+	const getImages = () => [...activeProject.querySelectorAll(".project-thumb")];
+
+	const showImage = (index) => {
+		const images = getImages();
+		if (!images.length) return;
+		activeIndex = (index + images.length) % images.length;
+		const image = images[activeIndex];
+		lightboxImage.src = image.currentSrc || image.src;
+		lightboxImage.alt = image.alt;
+		previousButton.hidden = images.length < 2;
+		nextButton.hidden = images.length < 2;
+	};
+
+	const close = () => {
+		overlay.classList.remove("is-open");
+		document.body.classList.remove("lightbox-open");
+		lastFocusedElement?.focus();
+		activeProject = null;
+	};
+
+	const open = (project, image) => {
+		activeProject = project;
+		lastFocusedElement = document.activeElement;
+		showImage(getImages().indexOf(image));
+		overlay.classList.add("is-open");
+		document.body.classList.add("lightbox-open");
+		closeButton.focus();
+	};
+
+	projects.forEach((project) => {
+		const media = project.querySelector(".project-media");
+		const images = [...project.querySelectorAll(".project-thumb")];
+		if (!media || !images.length) return;
+
+		const controls = document.createElement("div");
+		controls.className = "project-controls";
+		controls.innerHTML = `
+			<button class="project-control project-expand" type="button" aria-label="Expand project image">
+				<i class="fa-solid fa-expand" aria-hidden="true"></i>
+			</button>
+			<button class="project-control project-previous" type="button" aria-label="Previous project image">
+				<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+			</button>
+			<button class="project-control project-next" type="button" aria-label="Next project image">
+				<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+			</button>
+		`;
+		media.prepend(controls);
+
+		const expandButton = controls.querySelector(".project-expand");
+		const previousProjectButton = controls.querySelector(".project-previous");
+		const nextProjectButton = controls.querySelector(".project-next");
+		const rotate = (step) => media.dispatchEvent(new CustomEvent("projectrotate", { detail: { step } }));
+
+		expandButton.addEventListener("click", () => open(project, images.find((image) => image.classList.contains("project-thumb-middle")) || images[0]));
+		previousProjectButton.addEventListener("click", () => rotate(-1));
+		nextProjectButton.addEventListener("click", () => rotate(1));
+		images.forEach((image) => image.addEventListener("click", () => open(project, image)));
+	});
+
+	closeButton.addEventListener("click", close);
+	previousButton.addEventListener("click", () => showImage(activeIndex - 1));
+	nextButton.addEventListener("click", () => showImage(activeIndex + 1));
+	overlay.addEventListener("click", (event) => {
+		if (event.target === overlay) close();
+	});
+	document.addEventListener("keydown", (event) => {
+		if (!overlay.classList.contains("is-open")) return;
+		if (event.key === "Escape") close();
+		if (event.key === "ArrowLeft") showImage(activeIndex - 1);
+		if (event.key === "ArrowRight") showImage(activeIndex + 1);
 	});
 }
 
@@ -165,3 +274,4 @@ const currentPage = getCurrentPage();
 renderTabs(currentPage);
 renderSection(currentPage);
 setupProjectMediaAutoScroll();
+setupProjectImageViewer();

@@ -90,6 +90,45 @@ main#page-section .project {
   gap: 28px;
 }
 
+.project-controls {
+  position: absolute;
+  top: -3.75rem;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  gap: 0.45rem;
+}
+
+.project-control,
+.lightbox-control {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #c45912;
+  background: antiquewhite;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.project-control:hover,
+.project-control:focus-visible,
+.lightbox-control:hover,
+.lightbox-control:focus-visible {
+  color: antiquewhite;
+  background-color: #c45912;
+  outline: none;
+  transform: scale(1.08);
+}
+
+.project-control i,
+.lightbox-control i {
+  color: inherit;
+}
+
 main#page-section .projects-container {
   display: grid;
   gap: 2.75rem;
@@ -136,6 +175,80 @@ main#page-section .projects-container > .project + .project {
     transform 0.28s ease,
     box-shadow 0.28s ease,
     filter 0.28s ease;
+  cursor: zoom-in;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: rgba(38, 24, 12, 0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.project-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-image {
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 6rem);
+  max-height: calc(100vh - 6rem);
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lightbox-control {
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  color: #57250e;
+  background: antiquewhite;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.lightbox-control:hover,
+.lightbox-control:focus-visible {
+  color: antiquewhite;
+  background: #c45912;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+}
+
+.lightbox-previous {
+  left: 1.25rem;
+}
+
+.lightbox-next {
+  right: 1.25rem;
+}
+
+.lightbox-control[hidden] {
+  display: none;
 }
 
 main#page-section .project-thumb.is-white-background {
@@ -422,6 +535,27 @@ footer p {
 
   main#page-section .project-thumb {
     width: 80%;
+  }
+
+  .project-controls {
+    top: -3.75rem;
+  }
+
+  .project-lightbox {
+    padding: 3rem 0.5rem;
+  }
+
+  .lightbox-image {
+    max-width: calc(100vw - 5rem);
+    max-height: calc(100vh - 7rem);
+  }
+
+  .lightbox-previous {
+    left: 0.5rem;
+  }
+
+  .lightbox-next {
+    right: 0.5rem;
   }
 
   body[data-page="network"] div#grid {
