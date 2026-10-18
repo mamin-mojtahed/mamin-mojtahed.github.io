@@ -61,6 +61,7 @@ function setupProjectMediaAutoScroll() {
 			intervalId = window.setInterval(() => {
 				rotation = (rotation - 1 + thumbs.length) % thumbs.length;
 				applyOrder(thumbs, rotation);
+				projectMedia.dispatchEvent(new Event("projectlayoutchange"));
 			}, 2200);
 		};
 
@@ -77,7 +78,10 @@ function setupProjectMediaAutoScroll() {
 		projectMedia.addEventListener("projectrotate", (event) => {
 			rotation = (rotation + event.detail.step + thumbs.length) % thumbs.length;
 			applyOrder(thumbs, rotation);
+			projectMedia.dispatchEvent(new Event("projectlayoutchange"));
 		});
+		projectMedia.addEventListener("projectpause", stop);
+		projectMedia.addEventListener("projectresume", start);
 
 		projectMedia.addEventListener("pointerenter", stop);
 		projectMedia.addEventListener("pointerleave", start);
@@ -119,7 +123,33 @@ function setupProjectImageViewer() {
 	let activeIndex = 0;
 	let lastFocusedElement = null;
 
+	const fitLightboxImage = () => {
+		if (!lightboxImage.naturalWidth || !lightboxImage.naturalHeight) return;
+		const isMobile = window.matchMedia("(max-width: 760px)").matches;
+		const availableWidth = window.innerWidth - (isMobile ? 5 : 6) * 16;
+		const availableHeight = window.innerHeight - (isMobile ? 7 : 6) * 16;
+		const thumbnailRatio = 16 / 9;
+		const scale = Math.min(
+			availableWidth / lightboxImage.naturalWidth,
+			availableHeight / (lightboxImage.naturalWidth / thumbnailRatio)
+		);
+		lightboxImage.style.width = `${lightboxImage.naturalWidth * scale}px`;
+		lightboxImage.style.height = `${(lightboxImage.naturalWidth / thumbnailRatio) * scale}px`;
+	};
+	lightboxImage.addEventListener("load", fitLightboxImage);
+	window.addEventListener("resize", fitLightboxImage);
+
 	const getImages = () => [...activeProject.querySelectorAll(".project-thumb")];
+
+	const copyThumbnailPresentation = (image) => {
+		const styles = getComputedStyle(image);
+		lightboxImage.style.backgroundColor = styles.backgroundColor;
+		lightboxImage.style.objectFit = styles.objectFit;
+		lightboxImage.style.objectPosition = styles.objectPosition;
+		lightboxImage.style.borderRadius = styles.borderRadius;
+		lightboxImage.style.filter = styles.filter;
+		lightboxImage.style.opacity = styles.opacity;
+	};
 
 	const showImage = (index) => {
 		const images = getImages();
@@ -128,6 +158,8 @@ function setupProjectImageViewer() {
 		const image = images[activeIndex];
 		lightboxImage.src = image.currentSrc || image.src;
 		lightboxImage.alt = image.alt;
+		copyThumbnailPresentation(image);
+		fitLightboxImage();
 		previousButton.hidden = images.length < 2;
 		nextButton.hidden = images.length < 2;
 	};
@@ -156,26 +188,44 @@ function setupProjectImageViewer() {
 		const controls = document.createElement("div");
 		controls.className = "project-controls";
 		controls.innerHTML = `
-			<button class="project-control project-expand" type="button" aria-label="Expand project image">
-				<i class="fa-solid fa-expand" aria-hidden="true"></i>
-			</button>
 			<button class="project-control project-previous" type="button" aria-label="Previous project image">
 				<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+			</button>
+			<button class="project-control project-expand" type="button" aria-label="Expand project image">
+				<i class="fa-solid fa-expand" aria-hidden="true"></i>
 			</button>
 			<button class="project-control project-next" type="button" aria-label="Next project image">
 				<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
 			</button>
 		`;
-		media.prepend(controls);
+		project.prepend(controls);
+		const title = project.querySelector(".project-copy .title");
+		const alignControlsWithTitle = () => {
+			const projectTop = project.getBoundingClientRect().top;
+			if (window.matchMedia("(max-width: 760px)").matches) {
+				const mediaTop = media.getBoundingClientRect().top;
+				controls.style.top = `${mediaTop - projectTop - controls.offsetHeight - 16}px`;
+				return;
+			}
+			if (title) controls.style.top = `${title.getBoundingClientRect().top - projectTop - 10}px`;
+		};
+		alignControlsWithTitle();
+		window.addEventListener("resize", alignControlsWithTitle);
+		controls.addEventListener("pointerenter", () => media.dispatchEvent(new Event("projectpause")));
+		controls.addEventListener("pointerleave", () => media.dispatchEvent(new Event("projectresume")));
+		controls.addEventListener("focusin", () => media.dispatchEvent(new Event("projectpause")));
+		controls.addEventListener("focusout", (event) => {
+			if (!controls.contains(event.relatedTarget)) media.dispatchEvent(new Event("projectresume"));
+		});
 
 		const expandButton = controls.querySelector(".project-expand");
 		const previousProjectButton = controls.querySelector(".project-previous");
 		const nextProjectButton = controls.querySelector(".project-next");
 		const rotate = (step) => media.dispatchEvent(new CustomEvent("projectrotate", { detail: { step } }));
 
-		expandButton.addEventListener("click", () => open(project, images.find((image) => image.classList.contains("project-thumb-middle")) || images[0]));
-		previousProjectButton.addEventListener("click", () => rotate(-1));
-		nextProjectButton.addEventListener("click", () => rotate(1));
+		expandButton.addEventListener("click", () => open(project, images.find((image) => image.classList.contains("project-thumb-top")) || images[0]));
+		previousProjectButton.addEventListener("click", () => rotate(1));
+		nextProjectButton.addEventListener("click", () => rotate(-1));
 		images.forEach((image) => image.addEventListener("click", () => open(project, image)));
 	});
 

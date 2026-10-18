@@ -85,6 +85,7 @@ img#pfp {
 
 main#page-section .project {
   width: 100%;
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 28px;
@@ -92,10 +93,12 @@ main#page-section .project {
 
 .project-controls {
   position: absolute;
-  top: -3.75rem;
-  right: 0;
+  top: 0;
+  left: 0;
   z-index: 5;
+  width: calc((100% - 28px) / 2);
   display: flex;
+  justify-content: center;
   gap: 0.45rem;
 }
 
@@ -119,7 +122,7 @@ main#page-section .project {
 .lightbox-control:hover,
 .lightbox-control:focus-visible {
   color: antiquewhite;
-  background-color: #c45912;
+  background-color: tan;
   outline: none;
   transform: scale(1.08);
 }
@@ -145,7 +148,7 @@ main#page-section .projects-container > .project + .project {
 .project-media {
   position: relative;
   flex: 1 1 0;
-  align-self: center;
+  align-self: flex-start;
   width: 100%;
   max-width: 100%;
   /* min-width: 0; */
@@ -153,6 +156,7 @@ main#page-section .projects-container > .project + .project {
   aspect-ratio: 16 / 9;
   height: auto;
   min-height: 0;
+  margin-top: 4.25rem;
   background: transparent;
   overflow: visible;
   --thumb-shift: clamp(0.75rem, 2.4vw, 1.55rem);
@@ -210,8 +214,10 @@ body.lightbox-open {
 .lightbox-image {
   display: block;
   width: auto;
-  max-width: calc(100vw - 6rem);
-  max-height: calc(100vh - 6rem);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
@@ -230,7 +236,7 @@ body.lightbox-open {
 .lightbox-control:hover,
 .lightbox-control:focus-visible {
   color: antiquewhite;
-  background: #c45912;
+  background: tan;
 }
 
 .lightbox-close {
@@ -538,7 +544,7 @@ footer p {
   }
 
   .project-controls {
-    top: -3.75rem;
+    width: min(100%, 360px);
   }
 
   .project-lightbox {
@@ -546,8 +552,8 @@ footer p {
   }
 
   .lightbox-image {
-    max-width: calc(100vw - 5rem);
-    max-height: calc(100vh - 7rem);
+    width: auto;
+    height: auto;
   }
 
   .lightbox-previous {
