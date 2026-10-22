@@ -311,8 +311,10 @@ function renderSection(currentPage) {
 		throw new Error("Page template is missing required elements");
 	}
 
-	titleElement.textContent = config.title;
-	document.title = config.documentTitle;
+	if (document.body.dataset.preserveTitle !== "true") {
+		titleElement.textContent = config.title;
+		document.title = config.documentTitle;
+	}
 }
 
 document.querySelectorAll("header *").forEach((elem) => {
