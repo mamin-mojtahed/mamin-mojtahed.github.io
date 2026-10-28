@@ -109,6 +109,7 @@ function setupProjectImageViewer() {
 			<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
 		</button>
 		<img class="lightbox-image" alt="">
+		<video class="lightbox-video" autoplay muted loop playsinline hidden></video>
 		<button class="lightbox-control lightbox-next" type="button" aria-label="Next project image">
 			<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
 		</button>
@@ -116,6 +117,7 @@ function setupProjectImageViewer() {
 	document.body.append(overlay);
 
 	const lightboxImage = overlay.querySelector(".lightbox-image");
+	const lightboxVideo = overlay.querySelector(".lightbox-video");
 	const closeButton = overlay.querySelector(".lightbox-close");
 	const previousButton = overlay.querySelector(".lightbox-previous");
 	const nextButton = overlay.querySelector(".lightbox-next");
@@ -123,32 +125,36 @@ function setupProjectImageViewer() {
 	let activeIndex = 0;
 	let lastFocusedElement = null;
 
-	const fitLightboxImage = () => {
-		if (!lightboxImage.naturalWidth || !lightboxImage.naturalHeight) return;
+	const fitLightboxMedia = () => {
+		const media = lightboxVideo.hidden ? lightboxImage : lightboxVideo;
+		const mediaWidth = media === lightboxVideo ? lightboxVideo.videoWidth : lightboxImage.naturalWidth;
+		if (!mediaWidth) return;
 		const isMobile = window.matchMedia("(max-width: 760px)").matches;
 		const availableWidth = window.innerWidth - (isMobile ? 5 : 6) * 16;
 		const availableHeight = window.innerHeight - (isMobile ? 7 : 6) * 16;
 		const thumbnailRatio = 16 / 9;
 		const scale = Math.min(
-			availableWidth / lightboxImage.naturalWidth,
-			availableHeight / (lightboxImage.naturalWidth / thumbnailRatio)
+			availableWidth / mediaWidth,
+			availableHeight / (mediaWidth / thumbnailRatio)
 		);
-		lightboxImage.style.width = `${lightboxImage.naturalWidth * scale}px`;
-		lightboxImage.style.height = `${(lightboxImage.naturalWidth / thumbnailRatio) * scale}px`;
+		media.style.width = `${mediaWidth * scale}px`;
+		media.style.height = `${(mediaWidth / thumbnailRatio) * scale}px`;
 	};
-	lightboxImage.addEventListener("load", fitLightboxImage);
-	window.addEventListener("resize", fitLightboxImage);
+	lightboxImage.addEventListener("load", fitLightboxMedia);
+	lightboxVideo.addEventListener("loadedmetadata", fitLightboxMedia);
+	window.addEventListener("resize", fitLightboxMedia);
 
 	const getImages = () => [...activeProject.querySelectorAll(".project-thumb")];
 
 	const copyThumbnailPresentation = (image) => {
 		const styles = getComputedStyle(image);
-		lightboxImage.style.backgroundColor = styles.backgroundColor;
-		lightboxImage.style.objectFit = styles.objectFit;
-		lightboxImage.style.objectPosition = styles.objectPosition;
-		lightboxImage.style.borderRadius = styles.borderRadius;
-		lightboxImage.style.filter = styles.filter;
-		lightboxImage.style.opacity = styles.opacity;
+		const media = image instanceof HTMLVideoElement ? lightboxVideo : lightboxImage;
+		media.style.backgroundColor = styles.backgroundColor;
+		media.style.objectFit = styles.objectFit;
+		media.style.objectPosition = styles.objectPosition;
+		media.style.borderRadius = styles.borderRadius;
+		media.style.filter = styles.filter;
+		media.style.opacity = styles.opacity;
 	};
 
 	const showImage = (index) => {
@@ -156,10 +162,21 @@ function setupProjectImageViewer() {
 		if (!images.length) return;
 		activeIndex = (index + images.length) % images.length;
 		const image = images[activeIndex];
-		lightboxImage.src = image.currentSrc || image.src;
-		lightboxImage.alt = image.alt;
+		const isVideo = image instanceof HTMLVideoElement;
+		lightboxImage.hidden = isVideo;
+		lightboxVideo.hidden = !isVideo;
+		if (isVideo) {
+			lightboxVideo.src = image.currentSrc || image.querySelector("source")?.src || "";
+			lightboxVideo.load();
+			lightboxVideo.play().catch(() => {});
+		} else {
+			lightboxVideo.pause();
+			lightboxVideo.removeAttribute("src");
+			lightboxImage.src = image.currentSrc || image.src;
+			lightboxImage.alt = image.alt;
+		}
 		copyThumbnailPresentation(image);
-		fitLightboxImage();
+		fitLightboxMedia();
 		previousButton.hidden = images.length < 2;
 		nextButton.hidden = images.length < 2;
 	};
