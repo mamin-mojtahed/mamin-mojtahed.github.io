@@ -1,0 +1,213 @@
+{
+  "portfolio": [
+    {
+      "id": "ctrlaltlyrics",
+      "title": "Ctrl+Alt+Lyrics",
+      "subtitle": "All-in-one full-stack karaoke player",
+      "images": [
+        { "src": "/portfolio/files/CtrlAltLyrics-banner.svg", "alt": "Ctrl+Alt+Lyrics project interface" },
+        { "src": "/portfolio/files/Ctrlaltlyrics-demo-tabs-sidebyside.webp", "alt": "Ctrl+Alt+Lyrics project interface" },
+        { "src": "/portfolio/files/Ctrlaltlyrics-demo-edit-popup.webp", "alt": "Ctrl+Alt+Lyrics editing interface" }
+      ],
+      "bullets": [
+        "Made a local full-stack application with Node.js and Python that fetches and processes songs in the backend while providing display and music controls on the frontend.",
+        "Applied maximum automation and integration, putting public scripts together for different stages from fetching song info, splitting audio stems, and fetching and syncing lyrics."
+      ],
+      "links": [{ "href": "https://github.com/mamin-mojtahed/CtrlAltLyrics", "icon": "fa-brands fa-github" }]
+    },
+    {
+      "id": "valuelizer",
+      "title": "Valuelizer",
+      "subtitle": "NLP mapping of conversations to Schwartz's values model",
+      "images": [
+        { "src": "/portfolio/files/Valuelizer-Demo-SimpleGraph.webp", "alt": "Valuelizer graph demonstration" },
+        { "src": "/portfolio/files/Valuelizer-Demo-TraitCompare.webp", "alt": "Valuelizer trait comparison" },
+        { "src": "/portfolio/files/Valuelizer-Demo-ModelCompare.webp", "alt": "Valuelizer model comparison" }
+      ],
+      "bullets": [
+        "Visualizes evolving speaker value profiles across different dimentions of <i>Schwartz's Theory of Basic Values</i>.",
+        "Provides interface to compare evaluations between speakers, LLM models, and conversations.",
+        "Built with: Google AI Studio and Gemini Embedding Model API (+ other LLM APIs)"
+      ],
+      "links": [
+        { "href": "https://valuelizer.ai.studio", "icon": "fa-solid fa-globe" },
+        { "href": "https://github.com/mamin-mojtahed/Valuelizer", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "socraticai",
+      "title": "SocraticAI",
+      "subtitle": "NLP-based conversation match-maker",
+      "images": [
+        { "src": "/portfolio/files/SocraticAI-topics.mp4", "alt": "SocraticAI topics view", "video": true },
+        { "src": "/portfolio/files/SocraticAI-Graph.webp", "alt": "SocraticAI graph view" },
+        { "src": "/portfolio/files/SocraticAI-Trajectories.webp", "alt": "SocraticAI trajectories view" }
+      ],
+      "bullets": [
+        "A real-time, multi-user dialogue platform that pairs people across differing or converging perspectives using Socratic warmup.",
+        "Each waiting participant's topic and unpacked diagnostic stance are embedded into high-dimensional vectors for semantic vector matchmaking.",
+        "Built with: Google AI Studio and Gemini Embedding Model API"
+      ],
+      "links": [
+        { "href": "https://socraticai.ai.studio", "icon": "fa-solid fa-globe" },
+        { "href": "https://github.com/mamin-mojtahed/SocraticAI", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "3d-gfx_paint",
+      "title": "3D-GFX Paint",
+      "subtitle": "CS488 Computer Graphics Project",
+      "images": [
+        { "src": "/portfolio/files/3D-GFX-Paint-screenshot.webp", "alt": "3D-GFX Paint screenshot" },
+        { "src": "/portfolio/files/3D-GFX-Paint-gif.webp", "alt": "3D-GFX Paint demonstration" },
+        { "src": "/portfolio/files/3D-GFX-Paint-logo.webp", "alt": "3D-GFX Paint logo" }
+      ],
+      "bullets": [
+        "A 3D graphical adaptation of classic MS Paint software, with twists to turn it into an interactive painting simulator environment.",
+        "Implemented rigid and deformable body physics, collision detection between particles and surfaces, texture UV mapping and manipulation, Bounding Volume Hierarchy (BVH) optimization, and non-photorealistic rendering techniques."
+      ],
+      "links": [
+        { "href": "https://youtu.be/H4EavYZ-vhA", "icon": "fa-brands fa-youtube" },
+        { "href": "https://github.com/mamin-mojtahed/3D-GFX_PAINT", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "fine247",
+      "title": "FINE247 Portfolio",
+      "subtitle": "TouchDesigner Interactive Projects",
+      "images": [
+        { "src": "https://i.ytimg.com/vi/pDBb4cd0ujU/maxresdefault.jpg", "alt": "FINE247 project three" },
+        { "src": "https://i.ytimg.com/vi/XCsMABmMMiw/maxresdefault.jpg", "alt": "FINE247 project two" },
+        { "src": "https://i.ytimg.com/vi/QYYXfP7xj2Q/maxresdefault.jpg", "alt": "FINE247 project one" }
+      ],
+      "bullets": [
+        "Programmed dynamic, interactive, and immersive artworks using TouchDesigner during the FINE247 studio course.",
+        "Learned the fundamentals of digital manipulation and expanded media to design an installation for a cave automatic virtual environment (CAVE) exhibition."
+      ],
+      "links": [
+        { "href": "https://www.youtube.com/playlist?list=PLfoycFQ2G5d1Cqj9Cgsy-lSKBW3JprZ6M", "icon": "fa-brands fa-youtube" },
+        { "href": "https://github.com/mamin-mojtahed/FINE247", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "csfine383",
+      "title": "CS/FINE383 Portfolio",
+      "subtitle": "p5.js Computational Art Projects",
+      "images": [
+        { "src": "https://i.ytimg.com/vi/hviRf7Q5AJw/maxresdefault.jpg", "alt": "CS/FINE383 project three" },
+        { "src": "https://i.ytimg.com/vi/EFvUScQhKe4/maxresdefault.jpg", "alt": "CS/FINE383 project two" },
+        { "src": "https://i.ytimg.com/vi/1417NRH8BJA/maxresdefault.jpg", "alt": "CS/FINE383 project one" }
+      ],
+      "bullets": [
+        "Programmed generative, interactive, and computational artworks using p5.js JavaScript library during the CS/FINE383 studio course.",
+        "Learned techniques in computational digital art and interdisciplinary fields, including distributed systems and machine learning integration, to design an installation for a public pop-up exhibition."
+      ],
+      "links": [
+        { "href": "https://www.youtube.com/playlist?list=PLfoycFQ2G5d2g8Ohqsr45QaZptTH2b76_", "icon": "fa-brands fa-youtube" },
+        { "href": "https://github.com/mamin-mojtahed/CSFINE383", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "chronocraft",
+      "title": "ChronoCraft",
+      "subtitle": "Timeline Research & Visualization Tool",
+      "images": [
+        { "src": "/portfolio/files/ChronoCraft_icon_banner.webp", "alt": "ChronoCraft banner" },
+        { "src": "/portfolio/files/ChronoCraft_Demo-single-timeline.webp", "alt": "ChronoCraft single timeline", "whiteBackground": true },
+        { "src": "/portfolio/files/ChronoCraft_Demo-multiple-comparison.webp", "alt": "ChronoCraft timeline comparison" }
+      ],
+      "bullets": [
+        "Chronological visualization platform to generate interactive, rich visual timelines out of historical data.",
+        "Rendered with extending TimelineJS, and powered by AI search models like Google Gemini or OpenAI API.",
+        "Ability to fetch web content, modify meta-data, and compare previous queries stored locally."
+      ],
+      "links": [
+        { "href": "https://chronocraft.wiki", "icon": "fa-solid fa-globe" },
+        { "href": "https://github.com/mamin-mojtahed/ChronoCraft", "icon": "fa-brands fa-github" }
+      ]
+    },
+    {
+      "id": "psych444r",
+      "title": "PSYCH444R Psychological Intervention Design",
+      "subtitle": "Regulating Digital Narcissism",
+      "images": [
+        { "src": "/portfolio/files/PSYCH444R-PresentationDemo-Cover.webp", "alt": "PSYCH444R presentation cover" },
+        { "src": "/portfolio/files/PSYCH444R-PaperDemo.webp", "alt": "PSYCH444R paper" },
+        { "src": "/portfolio/files/PSYCH444R-PresentationDemo-Content.webp", "alt": "PSYCH444R presentation content" }
+      ],
+      "bullets": [
+        "Practiced wise psychological intervention design through a final presentation and a major report to introduce a social problem, a strategy to address it, and its evaluation.",
+        "Analyzed the \"digital narcissism\" effect at the interplay of narcissism, loneliness, and social media to propose self-regulation solutions."
+      ],
+      "links": [
+        { "href": "https://youtu.be/rSLyfZi6Q2U", "icon": "fa-brands fa-youtube" },
+        { "href": "https://docs.google.com/document/d/1siMdKb58NI1cygMehG1Vx-cHyYjXmSBD/view", "icon": "fa-brands fa-google-drive" }
+      ]
+    },
+    {
+      "id": "psych357",
+      "title": "PSYCH357 Group Project",
+      "subtitle": "Analyzing Psychology of \"Good\"",
+      "images": [
+        { "src": "https://humanlibrary.org/wp-content/uploads/HL_Facebook_header_1200x628px.jpg", "alt": "Human Library header", "whiteBackground": true },
+        { "src": "https://wealldeservebetter.wordpress.com/wp-content/uploads/2022/02/screen-shot-2022-02-08-at-10.51.28.png", "alt": "Human Library presentation", "whiteBackground": true },
+        { "src": "https://peacetour.org/wp-content/uploads/2016/03/Human-Library-icons-11web.jpg", "alt": "Human Library icons", "whiteBackground": true }
+      ],
+      "bullets": [
+        "Identified the <a href=\"https://humanlibrary.org\">Human Library Organization</a> as a non-profit institution with group psychological benefits, and researched its process and impact.",
+        "During a poster session, presented principles behind the vision of the organization, and discussed the challenges and opportunities in implementing its mission."
+      ],
+      "links": [{ "href": "https://drive.google.com/file/d/1OxffymtPGzAH9XO-VZiGHV2FnsvJpJSU/view", "icon": "fa-brands fa-google-drive" }]
+    }
+  ],
+  "expertise": [
+    {
+      "id": "tutoring",
+      "title": "Tutoring",
+      "subtitle": "Langauge Learning (Persian & English), Math, and Computational Thinking",
+      "images": [
+        { "src": "/expertise/files/MAmin_Cartoonish.webp", "alt": "Tutoring project illustration" },
+        { "src": "/expertise/files/MAmin_tutoring.webp", "alt": "Tutoring session" },
+        { "src": "/expertise/files/UWCLEC_and_Renison.webp", "alt": "UWCLEC and Renison tutoring" }
+      ],
+      "bullets": [
+        "Teaching students language learning, as part of UW Culture & Language Exchange Club (UWCLEC) and Renison College's English Conversation Partner Program (CPP).",
+        "Facilitated sessions for 8-12 y/o youth to do math and computational thinking excercises—plus bonus writing and sketching classes!",
+        "Attended <a href=\"https://cemc.uwaterloo.ca/workshops/educator-development/summer-conference-educators\">CEMC's 2026 Summer Conference for CS & Math Educators</a>."
+      ],
+      "links": [{ "href": "https://drive.google.com/drive/folders/101XrjYsgWVsajhQ9FRwB6Iizj55Csy-y", "icon": "fa-brands fa-google-drive" }]
+    },
+    {
+      "id": "multimedia",
+      "title": "Multimedia Design",
+      "subtitle": "Graphic Design, Video Editing, and Marketing Content Creation",
+      "images": [
+        { "src": "https://s3.amazonaws.com/res.e-institutes.com/PI/SEO-Imagery/Blogs/July+2024/GIMP-logos-3.jpg", "alt": "GIMP logo", "whiteBackground": true },
+        { "src": "/expertise/files/TouchDesigner_and_AdobePremierePro.webp", "alt": "TouchDesigner and Adobe Premiere Pro", "whiteBackground": true },
+        { "src": "https://assets.pluga.co/automatizations-pages-social/instagram_business-discord.png", "alt": "Instagram and Discord marketing", "fill": true }
+      ],
+      "bullets": [
+        "Proficiency in image editing and graphic design, from GIMP to Adobe Photoshop.",
+        "Experience with video editing software, such as Adobe Premiere Pro, and special effects tools such as TouchDesigner.",
+        "Knowledge of digital marketing principles for platform-specific content and announcements, such as Instagram and Discord."
+      ],
+      "links": [{ "href": "https://drive.google.com/drive/folders/1jf8MnScoRKOI6YHfN74VFPAGNentRmHW", "icon": "fa-brands fa-google-drive" }]
+    },
+    {
+      "id": "comedy",
+      "title": "Comedy?",
+      "subtitle": "Memes, Parodies, and Impersonations",
+      "images": [
+        { "src": "/expertise/files/JBP-parody.webp", "alt": "Comedy project parody" },
+        { "src": "/expertise/files/SubwayTakes-parody.webp", "alt": "SubwayTakes parody" },
+        { "src": "/expertise/files/FINE130-final-artwork.webp", "alt": "FINE130 final comedy artwork" }
+      ],
+      "bullets": [
+        "Made memes of my instructors since high school… got their endorsement to make more.",
+        "Kept up with pop-culture enough to tell relevant inside jokes, create specific parody artifacts <i class=\"fa-solid fa-shrimp\"></i>, and more or less <i>\"know ball\".</i>",
+        "Went beyond digital screens to bring comedic spirit to real life, from hosting SubwayTakes on ION rails (for PSYCH350 project) to imitating JBP at UW (Halloween social experiment)."
+      ],
+      "links": [{ "href": "https://mamin-mojtahed.github.io/moral-compass", "title": "???", "icon": "fa-solid fa-shrimp" }]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+[
+  { "label": "Email", "href": "mailto:amin.mojtahed@uwaterloo.ca", "icon": "fa-solid fa-at" },
+  { "label": "LinkedIn", "href": "https://linkedin.com/in/mamin-mojtahed", "icon": "fa-brands fa-linkedin-in" },
+  { "label": "GitHub", "href": "https://github.com/mamin-mojtahed", "icon": "fa-brands fa-github" },
+  { "label": "Telegram", "href": "https://t.me/e_Mojy", "icon": "fa-brands fa-telegram" },
+  { "label": "Instagram", "href": "https://www.instagram.com/mamin_mojtahed", "icon": "fa-solid fa-instagram" },
+  { "label": "YouTube", "href": "https://www.youtube.com/@mamin_mojtahed", "icon": "fa-solid fa-youtube" },
+  { "label": "Substack", "href": "https://maminmojtahed.substack.com", "icon": "fa-brands fa-substack" }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "Amin Mojtahed",
+  "url": "https://mamin-mojtahed.github.io",
+  "description": "I'm Amin, a new-grad computer science student at the University of Waterloo focused on human-computer interaction, psychology, cognitive science, and computational digital art.",
+  "keywords": "Amin Mojtahed, University of Waterloo, computer science, human-computer interaction, HCI, UX, user interface design, psychology, cognitive science, computational fine art",
+  "googleVerification": "u0EJjX6bk7Cy1ZWGSZ5z3nFLE4A7uthDgjDPbZFUlQY",
+  "banner": "/files/Wide HCI Human Computer Interaction.JPG",
+  "bannerAlt": "Creation of HCI Header Image",
+  "routes": [
+    { "key": "home", "path": "/", "label": "Homepage", "title": "Amin Mojtahed" },
+    { "key": "portfolio", "path": "/portfolio/", "label": "Portfolio", "title": "Portfolio" },
+    { "key": "expertise", "path": "/expertise/", "label": "Expertise", "title": "Expertise" },
+    { "key": "network", "path": "/network/", "label": "Network", "title": "Network" }
+  ]
+}

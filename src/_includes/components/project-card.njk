@@ -1,0 +1,25 @@
+<div class="project" id="{{ project.id }}">
+  <div class="project-media" aria-label="{{ project.title }} project thumbnails">
+    {% for image in project.images %}
+      {% set thumbClass = "project-thumb project-thumb-" + (["top", "middle", "bottom"][loop.index0] or "middle") + (" is-white-background" if image.whiteBackground else "") + (" img-fill" if image.fill else "") %}
+      {% if image.video %}
+        <video class="{{ thumbClass }}" autoplay muted loop playsinline>
+          <source src="{{ image.src }}" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
+        <img class="{{ thumbClass }}" src="{{ image.src }}" alt="{{ image.alt }}" />
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="project-copy">
+    <h2 class="title">{{ project.title }}</h2>
+    <h3 class="sub-title">{{ project.subtitle }}</h3>
+    <ul>
+      {% for bullet in project.bullets %}<li>{{ bullet | safe }}</li>{% endfor %}
+    </ul>
+    <div class="links">
+      {% for link in project.links %}<a href="{{ link.href }}" aria-label="{{ link.label or link.href }}"{% if link.title %} title="{{ link.title }}"{% endif %}><i class="{{ link.icon }}"></i></a>{% endfor %}
+    </div>
+  </div>
+</div>

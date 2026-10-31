@@ -1,0 +1,13 @@
+---
+layout: base.njk
+pageKey: portfolio
+title: Amin's Webpage | Portfolio
+headerTitle: Portfolio
+canonical: https://mamin-mojtahed.github.io/portfolio/
+---
+<main id="page-section" aria-live="polite">
+  <p>Preview of some of my recent projects!</p>
+  <div class="projects-container">
+    {% for project in projects.portfolio %}{% include "components/project-card.njk" %}{% endfor %}
+  </div>
+</main>

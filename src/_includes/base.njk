@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description or site.description }}" />
+    <meta name="keywords" content="{{ site.keywords }}" />
+    <meta name="author" content="Amin Mojtahed" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#f5e8d0" />
+    <link rel="canonical" href="{{ canonical or site.url }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:title" content="{{ ogTitle or title }}" />
+    <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:url" content="{{ canonical or site.url }}" />
+    <meta property="og:image" content="{{ site.url }}{{ site.banner }}" />
+    <meta property="og:image:alt" content="Wide header image for Amin Mojtahed's portfolio site" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ ogTitle or title }}" />
+    <meta name="twitter:description" content="{{ description or site.description }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ site.banner }}" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.3.0/css/all.css" />
+    <link rel="icon" href="/files/HCI Site Icon.jpg" />
+    <meta name="google-site-verification" content="{{ site.googleVerification }}" />
+    {% if preserveTitle %}
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Amin Mojtahed","url":"https://mamin-mojtahed.github.io","image":"https://mamin-mojtahed.github.io/files/Wide%20HCI%20Human%20Computer%20Interaction.JPG","jobTitle":"Computer Science New-grad","affiliation":{"@type":"CollegeOrUniversity","name":"University of Waterloo"},"sameAs":["https://linkedin.com/in/mamin-mojtahed","https://github.com/mamin-mojtahed"]}</script>
+    {% endif %}
+  </head>
+  <body data-page="{{ pageKey }}" data-base="{{ base or './' }}"{% if preserveTitle %} data-preserve-title="true"{% endif %}>
+    <header id="header">
+      <div id="emoticon">( ͡° ͜ʖ ͡°)</div>
+      <img id="banner" src="{{ site.banner }}" alt="{{ site.bannerAlt }}" />
+      <h1 id="title">{{ headerTitle or title }}</h1>
+    </header>
+    <nav id="tabs" aria-label="Section tabs"></nav>
+    {{ content | safe }}
+    <footer id="page-footer"></footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

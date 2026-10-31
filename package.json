@@ -1,0 +1,14 @@
+{
+  "name": "mamin-mojtahed-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "rm -rf _site && eleventy",
+    "preview": "npx serve _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "serve": "^14.2.4"
+  }
+}

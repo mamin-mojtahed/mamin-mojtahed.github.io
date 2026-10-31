@@ -1,0 +1,13 @@
+---
+layout: base.njk
+pageKey: expertise
+title: Amin's Webpage | Expertise
+headerTitle: Expertise
+canonical: https://mamin-mojtahed.github.io/expertise/
+---
+<main id="page-section" aria-live="polite">
+  <p>Some side-skills I've developed over time.</p>
+  <div class="projects-container">
+    {% for project in projects.expertise %}{% include "components/project-card.njk" %}{% endfor %}
+  </div>
+</main>

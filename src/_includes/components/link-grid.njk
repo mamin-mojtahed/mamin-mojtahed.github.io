@@ -1,0 +1,9 @@
+<div id="content">
+  <div id="list">
+    <div id="grid">
+      {% for link in links %}
+        <a href="{{ link.href }}"><i class="{{ link.icon }}"></i>{{ link.label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
