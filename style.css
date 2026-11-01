@@ -86,6 +86,7 @@ img#pfp {
 main#page-section .project {
   width: 100%;
   position: relative;
+  --project-media-top-space: 4.25rem;
   display: flex;
   align-items: flex-start;
   gap: 28px;
@@ -93,13 +94,17 @@ main#page-section .project {
 
 .project-controls {
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   z-index: 5;
   width: calc((100% - 28px) / 2);
   display: flex;
   justify-content: center;
   gap: 0.45rem;
+}
+
+main#page-section .projects-container > .project:first-child .project-controls {
+  top: -5px;
 }
 
 .project-control,
@@ -156,10 +161,11 @@ main#page-section .projects-container > .project + .project {
   aspect-ratio: 16 / 9;
   height: auto;
   min-height: 0;
-  margin-top: 4.25rem;
+  margin-top: var(--project-media-top-space);
   background: transparent;
   overflow: visible;
   --thumb-shift: clamp(0.75rem, 2.4vw, 1.55rem);
+  --thumb-horizontal-shift: var(--thumb-shift);
 }
 
 .project-thumb {
@@ -175,7 +181,7 @@ main#page-section .projects-container > .project + .project {
   background: #000;
   border-radius: 30px;
   box-shadow: 10px 20px 30px rgba(148, 96, 34, 0.5);
-  transform: translate(var(--thumb-x, -50%), var(--thumb-y, -50%));
+  transform: translateX(-50%) translateX(var(--thumb-offset-x, 0px)) translateY(var(--thumb-y, -50%));
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
@@ -197,6 +203,7 @@ body.lightbox-open {
   margin: 0;
   z-index: 100;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-items: center;
   justify-content: center;
@@ -207,6 +214,28 @@ body.lightbox-open {
   transition: opacity 0.25s ease;
 }
 
+.lightbox-caption {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: antiquewhite;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.lightbox-title {
+  color: inherit;
+  font-size: 1.25rem;
+}
+
+.lightbox-counter {
+  color: inherit;
+  font-size: 0.95rem;
+}
+
 .project-lightbox.is-open {
   opacity: 1;
   pointer-events: auto;
@@ -214,6 +243,9 @@ body.lightbox-open {
 
 .lightbox-image,
 .lightbox-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: block;
   width: auto;
   height: auto;
@@ -222,6 +254,7 @@ body.lightbox-open {
   max-height: none;
   object-fit: contain;
   border-radius: 12px;
+  transform: translate(-50%, -50%);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
@@ -270,19 +303,19 @@ main#page-section .project-thumb.is-white-background {
 
 main#page-section .project-thumb-top {
   z-index: 3;
-  --thumb-x: calc(-50% - var(--thumb-shift));
+  --thumb-offset-x: calc(-1 * var(--thumb-horizontal-shift));
   --thumb-y: calc(-50% - var(--thumb-shift) * 2);
 }
 
 main#page-section .project-thumb-middle {
   z-index: 2;
-  --thumb-x: -50%;
+  --thumb-offset-x: 0px;
   --thumb-y: -50%;
 }
 
 main#page-section .project-thumb-bottom {
   z-index: 1;
-  --thumb-x: calc(-50% + var(--thumb-shift));
+  --thumb-offset-x: var(--thumb-horizontal-shift);
   --thumb-y: calc(-50% + var(--thumb-shift) * 2);
 }
 
@@ -534,24 +567,32 @@ footer p {
 @media (max-width: 760px) {
   main#page-section .project {
     flex-direction: column;
+    gap: 16px;
+    --project-media-top-space: 3.25rem;
   }
 
   main#page-section .project-media {
-    width: min(100%, 360px);
+    width: 100%;
+    max-width: none;
     flex-basis: auto;
+    align-self: center;
     aspect-ratio: 16 / 9;
     min-height: 0;
     background: transparent;
     --thumb-shift: clamp(0.55rem, 3vw, 1rem);
-    margin-bottom: 0.75rem;
+    --thumb-horizontal-shift: 2rem;
+    margin-top: 3.25rem;
+    margin-bottom: 0;
   }
 
   main#page-section .project-thumb {
-    width: 80%;
+    width: min(80%, 18rem);
   }
 
   .project-controls {
-    width: min(100%, 360px);
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
   }
 
   .project-lightbox {

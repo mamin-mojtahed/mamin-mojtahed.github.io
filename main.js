@@ -110,6 +110,10 @@ function setupProjectImageViewer() {
 		</button>
 		<img class="lightbox-image" alt="">
 		<video class="lightbox-video" autoplay muted loop playsinline hidden></video>
+		<div class="lightbox-caption" aria-live="polite">
+			<strong class="lightbox-title"></strong>
+			<span class="lightbox-counter"></span>
+		</div>
 		<button class="lightbox-control lightbox-next" type="button" aria-label="Next project image">
 			<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
 		</button>
@@ -118,6 +122,9 @@ function setupProjectImageViewer() {
 
 	const lightboxImage = overlay.querySelector(".lightbox-image");
 	const lightboxVideo = overlay.querySelector(".lightbox-video");
+	const lightboxCaption = overlay.querySelector(".lightbox-caption");
+	const lightboxTitle = overlay.querySelector(".lightbox-title");
+	const lightboxCounter = overlay.querySelector(".lightbox-counter");
 	const closeButton = overlay.querySelector(".lightbox-close");
 	const previousButton = overlay.querySelector(".lightbox-previous");
 	const nextButton = overlay.querySelector(".lightbox-next");
@@ -131,7 +138,7 @@ function setupProjectImageViewer() {
 		if (!mediaWidth) return;
 		const isMobile = window.matchMedia("(max-width: 760px)").matches;
 		const availableWidth = window.innerWidth - (isMobile ? 5 : 6) * 16;
-		const availableHeight = window.innerHeight - (isMobile ? 7 : 6) * 16;
+		const availableHeight = window.innerHeight - (isMobile ? 7 : 6) * 16 - lightboxCaption.offsetHeight - 12;
 		const thumbnailRatio = 16 / 9;
 		const scale = Math.min(
 			availableWidth / mediaWidth,
@@ -139,6 +146,8 @@ function setupProjectImageViewer() {
 		);
 		media.style.width = `${mediaWidth * scale}px`;
 		media.style.height = `${(mediaWidth / thumbnailRatio) * scale}px`;
+		const mediaBox = media.getBoundingClientRect();
+		lightboxCaption.style.top = `${mediaBox.bottom + 12}px`;
 	};
 	lightboxImage.addEventListener("load", fitLightboxMedia);
 	lightboxVideo.addEventListener("loadedmetadata", fitLightboxMedia);
@@ -176,9 +185,21 @@ function setupProjectImageViewer() {
 			lightboxImage.alt = image.alt;
 		}
 		copyThumbnailPresentation(image);
+		lightboxTitle.textContent = activeProject.querySelector(".project-copy .title")?.textContent || "";
+		lightboxCounter.textContent = `(${activeIndex + 1}/${images.length})`;
 		fitLightboxMedia();
 		previousButton.hidden = images.length < 2;
 		nextButton.hidden = images.length < 2;
+	};
+
+	const showProject = (step) => {
+		const currentProjectIndex = projects.indexOf(activeProject);
+		if (currentProjectIndex < 0) return;
+		const nextProjectIndex = (currentProjectIndex + step + projects.length) % projects.length;
+		activeProject = projects[nextProjectIndex];
+		const images = getImages();
+		const topImageIndex = images.findIndex((image) => image.classList.contains("project-thumb-top"));
+		showImage(topImageIndex >= 0 ? topImageIndex : 0);
 	};
 
 	const close = () => {
@@ -216,18 +237,27 @@ function setupProjectImageViewer() {
 			</button>
 		`;
 		project.prepend(controls);
-		const title = project.querySelector(".project-copy .title");
-		const alignControlsWithTitle = () => {
-			const projectTop = project.getBoundingClientRect().top;
-			if (window.matchMedia("(max-width: 760px)").matches) {
-				const mediaTop = media.getBoundingClientRect().top;
-				controls.style.top = `${mediaTop - projectTop - controls.offsetHeight - 16}px`;
+		const updateThumbnailSpread = () => {
+			if (!window.matchMedia("(max-width: 760px)").matches) {
+				media.style.removeProperty("--thumb-horizontal-shift");
+				media.style.removeProperty("height");
+				media.style.removeProperty("aspect-ratio");
 				return;
 			}
-			if (title) controls.style.top = `${title.getBoundingClientRect().top - projectTop - 10}px`;
+			const mediaWidth = media.getBoundingClientRect().width;
+			const thumbnailWidth = images[0].getBoundingClientRect().width;
+			const verticalShift = Math.min(16, Math.max(8.8, window.innerWidth * 0.03));
+			const edgeBasedShift = (mediaWidth - thumbnailWidth) / 2;
+			const horizontalShift = Math.max(32, Math.min(128, edgeBasedShift));
+			images.forEach((image) => image.style.setProperty("transition", "none"));
+			media.style.setProperty("--thumb-horizontal-shift", `${horizontalShift}px`);
+			media.style.setProperty("height", `${thumbnailWidth * 9 / 16 + verticalShift * 4}px`);
+			media.style.setProperty("aspect-ratio", "auto");
+			void media.offsetWidth;
+			images.forEach((image) => image.style.removeProperty("transition"));
 		};
-		alignControlsWithTitle();
-		window.addEventListener("resize", alignControlsWithTitle);
+		updateThumbnailSpread();
+		window.addEventListener("resize", updateThumbnailSpread);
 		controls.addEventListener("pointerenter", () => media.dispatchEvent(new Event("projectpause")));
 		controls.addEventListener("pointerleave", () => media.dispatchEvent(new Event("projectresume")));
 		controls.addEventListener("focusin", () => media.dispatchEvent(new Event("projectpause")));
@@ -257,6 +287,9 @@ function setupProjectImageViewer() {
 		if (event.key === "Escape") close();
 		if (event.key === "ArrowLeft") showImage(activeIndex - 1);
 		if (event.key === "ArrowRight") showImage(activeIndex + 1);
+		if (event.key === "ArrowUp") showProject(-1);
+		if (event.key === "ArrowDown") showProject(1);
+		if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) event.preventDefault();
 	});
 }
 
